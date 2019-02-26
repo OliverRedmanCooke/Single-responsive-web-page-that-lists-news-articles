@@ -1,6 +1,6 @@
 # Single-responsive-web-page-that-lists-news-articles
 
-This reponsive web page calls an external JSON file and lists the data as news items. 
+This responsive web page calls an external JSON file and lists the data as news items. 
 
 Technology used: Jquery, JSON, HTML and CSS
 
