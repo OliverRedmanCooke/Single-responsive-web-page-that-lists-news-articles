@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <title>Challenge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Example web page that displays news items from JSON file">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div>
+            <h1> Latest News From Nottingham City Transport </h1>
+        </div>
+    </header>
+    <div class="container">
+        <script id="blog" type="template">
+            <div class="card">
+                    <div style=" background-image: url('{{image}}');" class="thumbnail" aria-label="{{imagealt}}">
+                    </div>
+                        <div class="caption">
+                            <h3>{{title}}</h3>
+                            <p>{{body}}</p>  
+                            <a class="button" target="_blank" title="Article - {{title}}" href="{{domain}}{{url}}">Read More</a>
+                        </div>
+                </div>
+                </script>
+        </script>
+        </script>
+    </div>
+    <script>
+        $(function () {
+            $.ajax({
+                url: 'https://gist.githubusercontent.com/dave1010/2406d86cea97da020ef1bb9f13eb8eec/raw/f4d32185f91e830f8ee41d137056ccd1e373fa90/news.json',
+                success: function (content) {
+                    var temp = $.trim($('#blog').html());
+                    $.each(JSON.parse(content), function (index, obj) {
+                        var x = temp.replace(
+                            /{{title}}/ig, obj.title[0].value).replace(/{{image}}/ig,
+                            obj.field_lead_image[0].styles[2].url).replace(
+                            /{{imagealt}}/ig, obj.field_lead_image[
+                                0].alt).replace(/{{body}}/ig, obj.body[0].summary).replace(
+                            /{{url}}/ig, obj.url).replace(/{{domain}}/ig,
+                            "https://www.nctx.co.uk");
+                        $('.container').append(x);
+                    });
+                }
+            })
+        });
+    </script>
+</body>
+
+</html>
